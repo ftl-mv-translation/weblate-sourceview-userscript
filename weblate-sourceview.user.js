@@ -7,8 +7,8 @@
 // @grant          GM_addStyle
 // @grant          GM_getResourceText
 // @resource       HLJS_CSS https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/ashes.min.css
-// @require        https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js
-// @version        1.10
+// @require        https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js
+// @version        2.00
 // ==/UserScript==
 
 (() => {
@@ -40,22 +40,21 @@
         }
     }
 
-    var escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    //var escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
     var main = () => {
         var fileName = null;
         var lineNo = null;
 
-        var GITHUB_SOURCE_BROWSER_PREFIX = "https://github.com/ftl-mv-translation/ftl-mv-translation/blob/main/";
-        var GITHUB_RAW_PREFIX = "https://raw.githubusercontent.com/ftl-mv-translation/ftl-mv-translation/main/";
+        var GITHUB_SOURCE_BROWSER_PREFIX = "https://github\.com/ftl-mv-translation/(.*)/blob/main/";
 
-        var regexSourceBrowser = new RegExp(escapeRegExp(GITHUB_SOURCE_BROWSER_PREFIX) + "(.*)#L([0-9]+)");
+        var regexSourceBrowser = new RegExp(GITHUB_SOURCE_BROWSER_PREFIX + "(.*)#L([0-9]+)");
 
         [...document.querySelectorAll('.string-info a')].every((e) => {
             var match = e.href.match(regexSourceBrowser);
             if (match) {
-                fileName = GITHUB_RAW_PREFIX + match[1];
-                lineNo = parseInt(match[2]);
+                fileName = "https://raw.githubusercontent.com/ftl-mv-translation/" + match[1] + "/main/" + match[2];
+                lineNo = parseInt(match[3]);
                 return false;
             }
             return true;
