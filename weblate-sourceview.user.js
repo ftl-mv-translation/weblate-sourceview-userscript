@@ -6,9 +6,9 @@
 // @grant          GM_xmlhttpRequest
 // @grant          GM_addStyle
 // @grant          GM_getResourceText
-// @resource       HLJS_CSS https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css
+// @resource       HLJS_CSS https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/ashes.min.css
 // @require        https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js
-// @version        1.00
+// @version        1.10
 // ==/UserScript==
 
 (() => {
